@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const TokenSystem = () => {
+  const { t } = useLanguage()
   const [selectedDrive, setSelectedDrive] = useState('')
   const [quantity, setQuantity] = useState('')
   const [showBooking, setShowBooking] = useState(false)
@@ -17,30 +19,30 @@ const TokenSystem = () => {
     {
       id: 1,
       tokenNumber: 'WHT240923-156',
-      crop: 'गेहूं',
-      quantity: '75 कुंतल',
+      crop: t('wheat'),
+      quantity: `75 ${t('quintal')}`,
       timeSlot: '11:00 AM - 12:00 PM',
       date: 'कल, 23 सितंबर',
-      location: 'सरिया मंडी',
+      location: t('sariya-mandi'),
       status: 'confirmed',
       qrCode: true
     },
     {
       id: 2,
       tokenNumber: 'SOY240925-089',
-      crop: 'सोयाबीन',
-      quantity: '50 कुंतल',
+      crop: t('soybean'),
+      quantity: `50 ${t('quintal')}`,
       timeSlot: '2:00 PM - 3:00 PM',
       date: '25 सितंबर',
-      location: 'जिला मुख्यालय',
+      location: t('district-headquarters'),
       status: 'pending',
       qrCode: false
     }
   ]
 
   const availableDrives = [
-    { id: 1, name: 'गेहूं खरीद - सरिया मंडी (कल)', value: 'wheat-sariya' },
-    { id: 2, name: 'सोयाबीन खरीद - जिला मुख्यालय', value: 'soybean-district' }
+    { id: 1, name: `${t('wheat')} ${t('government-procurement')} - ${t('sariya-mandi')} (${t('tomorrow')})`, value: 'wheat-sariya' },
+    { id: 2, name: `${t('soybean')} ${t('government-procurement')} - ${t('district-headquarters')}`, value: 'soybean-district' }
   ]
 
   const bookToken = () => {
@@ -60,9 +62,9 @@ const TokenSystem = () => {
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case 'confirmed': return 'पुष्ट'
-      case 'pending': return 'प्रतीक्षारत'
-      case 'completed': return 'पूर्ण'
+      case 'confirmed': return t('confirmed')
+      case 'pending': return t('pending')
+      case 'completed': return t('completed')
       default: return status
     }
   }
@@ -70,33 +72,33 @@ const TokenSystem = () => {
   return (
     <div className="p-4 space-y-6">
       <div className="bg-gradient-to-r from-purple-600 to-purple-700 rounded-xl p-6 text-white">
-        <h1 className="text-2xl font-bold mb-2">Token System</h1>
+        <h1 className="text-2xl font-bold mb-2">{t('tokens')}</h1>
         <p className="text-purple-100">Book your time slot for government procurement</p>
       </div>
 
       <div className="flex justify-between items-center">
-        <h2 className="text-xl font-semibold">My Tokens</h2>
+        <h2 className="text-xl font-semibold">{t('my-tokens')}</h2>
         <button
           onClick={() => setShowBooking(true)}
           className="bg-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-700"
         >
-          + Book Token
+          + {t('book-token')}
         </button>
       </div>
 
       {showBooking && (
         <div className="bg-white rounded-xl p-6 shadow-sm border border-purple-200">
-          <h3 className="text-lg font-semibold mb-4">Book New Token</h3>
+          <h3 className="text-lg font-semibold mb-4">{t('book-new-token')}</h3>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Select Procurement Drive</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">{t('select-procurement-drive')}</label>
               <select
                 value={selectedDrive}
                 onChange={(e) => setSelectedDrive(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500"
               >
-                <option value="">Choose a drive</option>
+                <option value="">{t('choose-drive')}</option>
                 {availableDrives.map((drive) => (
                   <option key={drive.id} value={drive.value}>{drive.name}</option>
                 ))}
@@ -104,7 +106,7 @@ const TokenSystem = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Quantity (कुंतल)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">{t('quantity-quintals')}</label>
               <input
                 type="number"
                 value={quantity}
@@ -116,7 +118,7 @@ const TokenSystem = () => {
 
             {selectedDrive && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-3">Select Time Slot</label>
+                <label className="block text-sm font-medium text-gray-700 mb-3">{t('select-time-slot')}</label>
                 <div className="grid grid-cols-1 gap-2">
                   {availableSlots.map((slot, index) => (
                     <button
@@ -133,7 +135,7 @@ const TokenSystem = () => {
                       <div className="flex justify-between items-center">
                         <span className="font-medium">{slot.time}</span>
                         <span className="text-sm">
-                          {slot.available === 0 ? 'भर गया' : `${slot.available} स्लॉट उपलब्ध`}
+                          {slot.available === 0 ? t('slot-full') : `${slot.available} ${t('slots-available')}`}
                         </span>
                       </div>
                     </button>
@@ -154,7 +156,7 @@ const TokenSystem = () => {
                 disabled={!selectedDrive || !quantity}
                 className="flex-1 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 disabled:bg-gray-300"
               >
-                Book Token
+                {t('book-token')}
               </button>
             </div>
           </div>
@@ -166,9 +168,9 @@ const TokenSystem = () => {
           <div key={token.id} className="bg-white rounded-xl p-6 shadow-sm border">
             <div className="flex justify-between items-start mb-4">
               <div>
-                <h3 className="text-lg font-semibold">{token.crop} Sale</h3>
+                <h3 className="text-lg font-semibold">{token.crop} {t('sale')}</h3>
                 <p className="text-gray-600">{token.location}</p>
-                <p className="text-sm text-gray-500">Token: {token.tokenNumber}</p>
+                <p className="text-sm text-gray-500">{t('token-number')}: {token.tokenNumber}</p>
               </div>
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(token.status)}`}>
                 {getStatusText(token.status)}
@@ -191,7 +193,7 @@ const TokenSystem = () => {
               <div className="bg-purple-50 rounded-lg p-4 mb-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="font-medium text-purple-800">Ready to sell!</p>
+                    <p className="font-medium text-purple-800">{t('ready-to-sell')}</p>
                     <p className="text-sm text-purple-600">Show this QR code at the center</p>
                   </div>
                   <div className="w-16 h-16 bg-white border-2 border-purple-200 rounded-lg flex items-center justify-center">
@@ -204,15 +206,15 @@ const TokenSystem = () => {
             <div className="flex space-x-2">
               {token.qrCode && (
                 <button className="flex-1 bg-purple-50 text-purple-700 py-2 rounded-lg font-medium hover:bg-purple-100">
-                  Show QR Code
+                  {t('show-qr-code')}
                 </button>
               )}
               <button className="flex-1 bg-gray-50 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-100">
-                View Details
+                {t('view-details')}
               </button>
               {token.status === 'pending' && (
                 <button className="flex-1 bg-red-50 text-red-700 py-2 rounded-lg font-medium hover:bg-red-100">
-                  Cancel Token
+                  {t('cancel-token')}
                 </button>
               )}
             </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Login = () => {
   const [phone, setPhone] = useState('')
@@ -7,6 +8,7 @@ const Login = () => {
   const [otpSent, setOtpSent] = useState(false)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const { t } = useLanguage()
 
   const sendOtp = async () => {
     if (phone.length === 10) {
@@ -36,22 +38,22 @@ const Login = () => {
             <span className="text-2xl">🌾</span>
           </div>
           <h1 className="text-2xl font-bold text-green-700 mb-1">
-            किसान सुविधा
+            {t('kisan-suvidha')}
           </h1>
-          <p className="text-gray-500 text-sm">Farmer's Digital Helper</p>
+          <p className="text-gray-500 text-sm">{t('farmers-digital-helper')}</p>
         </div>
 
         {!otpSent ? (
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                📱 Mobile Number
+                📱 {t('mobile-number')}
               </label>
               <input
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value.replace(/[^0-9]/g, ''))}
-                placeholder="Enter 10-digit mobile number"
+                placeholder={t('enter-10-digit-mobile')}
                 className="w-full px-3 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors"
                 maxLength={10}
               />
@@ -64,10 +66,10 @@ const Login = () => {
               {loading ? (
                 <div className="flex items-center justify-center">
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Sending OTP...
+                  {t('sending-otp')}
                 </div>
               ) : (
-                'Send OTP'
+                t('send-otp')
               )}
             </button>
           </div>
@@ -75,7 +77,7 @@ const Login = () => {
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                🔐 Enter OTP sent to +91 {phone}
+                🔐 {t('enter-otp-sent-to')} {phone}
               </label>
               <input
                 type="text"
@@ -94,10 +96,10 @@ const Login = () => {
               {loading ? (
                 <div className="flex items-center justify-center">
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Verifying...
+                  {t('verifying')}
                 </div>
               ) : (
-                'Verify & Login'
+                t('verify-login')
               )}
             </button>
             <button
@@ -107,14 +109,14 @@ const Login = () => {
               }}
               className="w-full text-green-600 py-2 text-sm font-medium hover:bg-green-50 rounded-md transition-colors"
             >
-              ← Change Number
+              {t('change-number')}
             </button>
           </div>
         )}
 
         <div className="mt-6 text-center">
           <div className="bg-yellow-50 border border-yellow-200 rounded-md p-3">
-            <p className="text-xs text-yellow-700">🔑 Demo OTP: 1234</p>
+            <p className="text-xs text-yellow-700">{t('demo-otp')}</p>
           </div>
         </div>
       </div>

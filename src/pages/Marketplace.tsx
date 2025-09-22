@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import ChatModal from '../components/ChatModal'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Marketplace = () => {
+  const { t } = useLanguage()
   const [activeTab, setActiveTab] = useState('listings')
   const [showAddListing, setShowAddListing] = useState(false)
   const [selectedCrop, setSelectedCrop] = useState('')
@@ -9,15 +11,15 @@ const Marketplace = () => {
   const [chatData, setChatData] = useState({ buyerName: '', cropName: '' })
 
   const myListings = [
-    { id: 1, crop: 'गेहूं', quantity: '100 कुंतल', price: '₹2,200/कुंतल', status: 'Active', inquiries: 5, image: '🌾' },
-    { id: 2, crop: 'सोयाबीन', quantity: '75 कुंतल', price: '₹4,500/कुंतल', status: 'Sold', inquiries: 0, image: '🫘' },
-    { id: 3, crop: 'चना', quantity: '50 कुंतल', price: '₹6,800/कुंतल', status: 'Active', inquiries: 3, image: '🫛' }
+    { id: 1, crop: t('wheat'), quantity: `100 ${t('quintal')}`, price: `₹2,200/${t('quintal')}`, status: t('active'), inquiries: 5, image: '🌾' },
+    { id: 2, crop: t('soybean'), quantity: `75 ${t('quintal')}`, price: `₹4,500/${t('quintal')}`, status: t('sold'), inquiries: 0, image: '🫘' },
+    { id: 3, crop: t('chickpea'), quantity: `50 ${t('quintal')}`, price: `₹6,800/${t('quintal')}`, status: t('active'), inquiries: 3, image: '🫛' }
   ]
 
   const nearbyListings = [
-    { id: 4, crop: 'प्याज', farmer: 'श्याम सिंह', location: '5 km away', quantity: '200 कुंतल', price: '₹1,800/कुंतल', image: '🧅' },
-    { id: 5, crop: 'आलू', farmer: 'गीता देवी', location: '8 km away', quantity: '150 कुंतल', price: '₹1,200/कुंतल', image: '🥔' },
-    { id: 6, crop: 'टमाटर', farmer: 'विनोद कुमार', location: '12 km away', quantity: '80 कुंतल', price: '₹3,000/कुंतल', image: '🍅' }
+    { id: 4, crop: t('onion'), farmer: 'श्याम सिंह', location: `5 ${t('km-away')}`, quantity: `200 ${t('quintal')}`, price: `₹1,800/${t('quintal')}`, image: '🧅' },
+    { id: 5, crop: t('potato'), farmer: 'गीता देवी', location: `8 ${t('km-away')}`, quantity: `150 ${t('quintal')}`, price: `₹1,200/${t('quintal')}`, image: '🥔' },
+    { id: 6, crop: t('tomato'), farmer: 'विनोद कुमार', location: `12 ${t('km-away')}`, quantity: `80 ${t('quintal')}`, price: `₹3,000/${t('quintal')}`, image: '🍅' }
   ]
 
   const openChat = (buyerName: string, cropName: string) => {
@@ -28,7 +30,7 @@ const Marketplace = () => {
   const AddListingForm = () => (
     <div className="bg-white rounded-2xl p-6 shadow-xl border border-green-100 space-y-5">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-bold text-gray-800">🌾 Add New Crop Listing</h3>
+        <h3 className="text-xl font-bold text-gray-800">🌾 {t('add-new-crop-listing')}</h3>
         <button
           onClick={() => setShowAddListing(false)}
           className="text-gray-400 hover:text-gray-600 text-xl"
@@ -38,24 +40,24 @@ const Marketplace = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">🌱 Crop Type</label>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">🌱 {t('crop-type')}</label>
         <select
           value={selectedCrop}
           onChange={(e) => setSelectedCrop(e.target.value)}
           className="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all"
         >
-          <option value="">Select Crop</option>
-          <option value="wheat">🌾 गेहूं (Wheat)</option>
-          <option value="soybean">🫘 सोयाबीन (Soybean)</option>
-          <option value="chickpea">🫛 चना (Chickpea)</option>
-          <option value="corn">🌽 मक्का (Corn)</option>
-          <option value="rice">🌾 धान (Rice)</option>
+          <option value="">{t('select-crop')}</option>
+          <option value="wheat">🌾 {t('wheat')}</option>
+          <option value="soybean">🫘 {t('soybean')}</option>
+          <option value="chickpea">🫛 {t('chickpea')}</option>
+          <option value="corn">🌽 {t('corn')}</option>
+          <option value="rice">🌾 {t('rice')}</option>
         </select>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">⚖️ Quantity (कुंतल)</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">⚖️ {t('quantity-quintals')}</label>
           <input
             type="number"
             placeholder="Enter quantity"
@@ -63,7 +65,7 @@ const Marketplace = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">💰 Price per कुंतल</label>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">💰 {t('price-per-quintal')}</label>
           <input
             type="number"
             placeholder="₹ Price"
@@ -73,7 +75,7 @@ const Marketplace = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">📸 Crop Photos</label>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">📸 {t('add-photos')}</label>
         <div className="border-2 border-dashed border-green-300 rounded-2xl p-8 text-center hover:border-green-400 transition-colors cursor-pointer bg-green-50">
           <div className="text-5xl mb-3">📷</div>
           <p className="text-gray-700 font-medium">Tap to add photos</p>
@@ -82,7 +84,7 @@ const Marketplace = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">📝 Description (Optional)</label>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">📝 {t('description')}</label>
         <textarea
           placeholder="Quality details, harvest date, etc."
           className="w-full p-4 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-green-100 focus:border-green-500 transition-all h-24 resize-none"
@@ -99,7 +101,7 @@ const Marketplace = () => {
         <button
           className="flex-1 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-semibold hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105 shadow-lg"
         >
-          📤 Post Listing
+          📤 {t('post-listing')}
         </button>
       </div>
     </div>
@@ -111,14 +113,14 @@ const Marketplace = () => {
       <div className="bg-green-600 p-4 text-white border-b-2 border-green-700">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold">🛒 Marketplace</h1>
+            <h1 className="text-2xl font-bold">🛒 {t('marketplace')}</h1>
             <p className="text-green-100 text-sm">Connect with buyers & sellers</p>
           </div>
           <button
             onClick={() => setShowAddListing(true)}
             className="bg-green-700 text-white px-4 py-2 rounded-md font-medium hover:bg-green-800 transition-colors border border-green-800"
           >
-            + Add Listing
+            + {t('add-new-crop-listing')}
           </button>
         </div>
       </div>
@@ -136,7 +138,7 @@ const Marketplace = () => {
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
-              📦 My Listings ({myListings.length})
+              📦 {t('my-listings')} ({myListings.length})
             </button>
             <button
               onClick={() => setActiveTab('nearby')}
@@ -146,7 +148,7 @@ const Marketplace = () => {
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
-              📍 Nearby Crops
+              📍 {t('nearby-listings')}
             </button>
           </div>
 
@@ -167,7 +169,7 @@ const Marketplace = () => {
                         </div>
                       </div>
                       <span className={`px-3 py-2 rounded-xl text-sm font-bold ${
-                        listing.status === 'Active'
+                        listing.status === t('active')
                           ? 'bg-green-100 text-green-800 border border-green-200'
                           : 'bg-gray-100 text-gray-800 border border-gray-200'
                       }`}>
@@ -175,12 +177,12 @@ const Marketplace = () => {
                       </span>
                     </div>
 
-                    {listing.status === 'Active' && (
+                    {listing.status === t('active') && (
                       <div className="mt-4 pt-4 border-t border-gray-100">
                         <div className="flex justify-between items-center mb-3">
                           <div className="flex items-center space-x-2">
                             <span className="text-xl">💬</span>
-                            <span className="text-sm font-medium text-gray-600">{listing.inquiries} inquiries</span>
+                            <span className="text-sm font-medium text-gray-600">{listing.inquiries} {t('inquiries')}</span>
                           </div>
                         </div>
                         <div className="flex space-x-3">
@@ -225,10 +227,10 @@ const Marketplace = () => {
                           onClick={() => openChat(listing.farmer, listing.crop)}
                           className="flex-1 bg-green-500 text-white px-4 py-3 rounded-xl font-semibold hover:bg-green-600 transition-all transform hover:scale-105 shadow-sm"
                         >
-                          📞 Contact Farmer
+                          📞 {t('contact-farmer')}
                         </button>
                         <button className="flex-1 bg-blue-500 text-white px-4 py-3 rounded-xl font-semibold hover:bg-blue-600 transition-all transform hover:scale-105 shadow-sm">
-                          👁️ View Details
+                          👁️ {t('view-details')}
                         </button>
                       </div>
                     </div>

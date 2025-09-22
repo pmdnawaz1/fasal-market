@@ -1,14 +1,16 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Navigation = () => {
   const location = useLocation()
+  const { t } = useLanguage()
 
   const navItems = [
-    { path: '/', label: 'होम', icon: '🏠' },
-    { path: '/marketplace', label: 'बाज़ार', icon: '🛒' },
-    { path: '/govt-connect', label: 'सरकार', icon: '🏛️' },
-    { path: '/token-system', label: 'टोकन', icon: '🎫' },
-    { path: '/profile', label: 'प्रोफाइल', icon: '👤' }
+    { path: '/', labelKey: 'home', icon: '🏠' },
+    { path: '/marketplace', labelKey: 'marketplace', icon: '🛒' },
+    { path: '/govt-connect', labelKey: 'government', icon: '🏛️' },
+    { path: '/token-system', labelKey: 'tokens', icon: '🎫' },
+    { path: '/profile', labelKey: 'profile', icon: '👤' }
   ]
 
   return (
@@ -25,7 +27,7 @@ const Navigation = () => {
             }`}
           >
             <span className="text-lg mb-1">{item.icon}</span>
-            <span className="text-xs font-medium">{item.label}</span>
+            <span className="text-xs font-medium">{t(item.labelKey)}</span>
           </Link>
         ))}
       </div>

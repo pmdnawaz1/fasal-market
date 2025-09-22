@@ -1,13 +1,15 @@
 import { useState } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const GovtConnect = () => {
+  const { t } = useLanguage()
   const [locationEnabled, setLocationEnabled] = useState(true)
 
   const upcomingDrives = [
     {
       id: 1,
-      crop: 'गेहूं',
-      location: 'सरिया मंडी',
+      crop: t('wheat'),
+      location: t('sariya-mandi'),
       date: 'कल, 23 सितंबर',
       time: '10:00 AM - 4:00 PM',
       price: '₹2,325/कुंतल',
@@ -17,8 +19,8 @@ const GovtConnect = () => {
     },
     {
       id: 2,
-      crop: 'सोयाबीन',
-      location: 'जिला मुख्यालय',
+      crop: t('soybean'),
+      location: t('district-headquarters'),
       date: '25 सितंबर',
       time: '9:00 AM - 5:00 PM',
       price: '₹4,892/कुंतल',
@@ -28,8 +30,8 @@ const GovtConnect = () => {
     },
     {
       id: 3,
-      crop: 'चना',
-      location: 'कृषि उपज मंडी',
+      crop: t('chickpea'),
+      location: t('krishi-upaj-mandi'),
       date: '28 सितंबर',
       time: '8:00 AM - 3:00 PM',
       price: '₹7,500/कुंतल',
@@ -42,20 +44,20 @@ const GovtConnect = () => {
   const pastPurchases = [
     {
       id: 1,
-      crop: 'गेहूं',
-      quantity: '75 कुंतल',
+      crop: t('wheat'),
+      quantity: `75 ${t('quintal')}`,
       amount: '₹1,74,375',
       date: '15 अप्रैल 2024',
-      location: 'सरिया मंडी',
+      location: t('sariya-mandi'),
       tokenNumber: 'WHT240415-089'
     },
     {
       id: 2,
-      crop: 'सोयाबीन',
-      quantity: '50 कुंतल',
+      crop: t('soybean'),
+      quantity: `50 ${t('quintal')}`,
       amount: '₹2,35,000',
       date: '12 नवंबर 2023',
-      location: 'जिला मुख्यालय',
+      location: t('district-headquarters'),
       tokenNumber: 'SOY231112-156'
     }
   ]
@@ -71,9 +73,9 @@ const GovtConnect = () => {
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case 'upcoming': return 'कल शुरू'
-      case 'registration-open': return 'रजिस्ट्रेशन खुला'
-      case 'coming-soon': return 'जल्द आएगा'
+      case 'upcoming': return t('tomorrow')
+      case 'registration-open': return t('registration-open')
+      case 'coming-soon': return t('coming-soon')
       default: return status
     }
   }
@@ -81,7 +83,7 @@ const GovtConnect = () => {
   return (
     <div className="p-4 space-y-6">
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-6 text-white">
-        <h1 className="text-2xl font-bold mb-2">Government Connect</h1>
+        <h1 className="text-2xl font-bold mb-2">{t('government')}</h1>
         <p className="text-blue-100">Get notified about procurement drives in your area</p>
       </div>
 
@@ -109,7 +111,7 @@ const GovtConnect = () => {
 
       <div className="bg-white rounded-xl shadow-sm">
         <div className="p-4 border-b border-gray-200">
-          <h3 className="text-lg font-semibold">Upcoming Drives</h3>
+          <h3 className="text-lg font-semibold">{t('upcoming-procurement-drives')}</h3>
         </div>
 
         <div className="divide-y divide-gray-200">
@@ -117,7 +119,7 @@ const GovtConnect = () => {
             <div key={drive.id} className="p-4">
               <div className="flex justify-between items-start mb-3">
                 <div>
-                  <h4 className="font-semibold text-lg">{drive.crop} खरीद</h4>
+                  <h4 className="font-semibold text-lg">{drive.crop} {t('government-procurement')}</h4>
                   <p className="text-gray-600">{drive.location} • {drive.distance}</p>
                   <p className="text-sm text-gray-500">{drive.authority}</p>
                 </div>
@@ -141,12 +143,12 @@ const GovtConnect = () => {
               <div className="flex space-x-2">
                 {drive.status === 'upcoming' && (
                   <button className="flex-1 bg-orange-50 text-orange-700 py-2 rounded-lg font-medium hover:bg-orange-100">
-                    Get Token Tomorrow
+                    {t('get-token')} {t('tomorrow')}
                   </button>
                 )}
                 {drive.status === 'registration-open' && (
                   <button className="flex-1 bg-green-50 text-green-700 py-2 rounded-lg font-medium hover:bg-green-100">
-                    Register Now
+                    {t('register-now')}
                   </button>
                 )}
                 {drive.status === 'coming-soon' && (
@@ -155,7 +157,7 @@ const GovtConnect = () => {
                   </button>
                 )}
                 <button className="px-4 py-2 border border-gray-300 rounded-lg font-medium text-gray-700 hover:bg-gray-50">
-                  Details
+                  {t('view-details')}
                 </button>
               </div>
             </div>
@@ -165,7 +167,7 @@ const GovtConnect = () => {
 
       <div className="bg-white rounded-xl shadow-sm">
         <div className="p-4 border-b border-gray-200">
-          <h3 className="text-lg font-semibold">Past Government Purchases</h3>
+          <h3 className="text-lg font-semibold">{t('past-government-purchases')}</h3>
         </div>
 
         <div className="divide-y divide-gray-200">
@@ -175,7 +177,7 @@ const GovtConnect = () => {
                 <div>
                   <h4 className="font-semibold">{purchase.crop} - {purchase.quantity}</h4>
                   <p className="text-gray-600">{purchase.location}</p>
-                  <p className="text-sm text-gray-500">Token: {purchase.tokenNumber}</p>
+                  <p className="text-sm text-gray-500">{t('token-number')}: {purchase.tokenNumber}</p>
                 </div>
                 <div className="text-right">
                   <p className="font-semibold text-green-600">{purchase.amount}</p>

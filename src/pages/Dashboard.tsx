@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
 
 const Dashboard = () => {
   const [showNotifications, setShowNotifications] = useState(false)
+  const { t } = useLanguage()
 
   const stats = {
     totalEarnings: '₹45,230',
@@ -12,15 +14,15 @@ const Dashboard = () => {
   }
 
   const recentSales = [
-    { id: 1, crop: 'गेहूं', quantity: '50 कुंतल', amount: '₹15,000', buyer: 'प्राइवेट बायर', date: '2 दिन पहले', icon: '🌾' },
-    { id: 2, crop: 'सोयाबीन', quantity: '30 कुंतल', amount: '₹12,000', buyer: 'सरकारी खरीद', date: '5 दिन पहले', icon: '🫘' },
-    { id: 3, crop: 'चना', quantity: '25 कुंतल', amount: '₹18,230', buyer: 'प्राइवेट बायर', date: '1 सप्ताह पहले', icon: '🫛' }
+    { id: 1, crop: t('wheat'), quantity: `50 ${t('quintal')}`, amount: '₹15,000', buyer: t('private-buyer'), date: `2 ${t('days-ago')}`, icon: '🌾' },
+    { id: 2, crop: t('soybean'), quantity: `30 ${t('quintal')}`, amount: '₹12,000', buyer: t('government-purchase'), date: `5 ${t('days-ago')}`, icon: '🫘' },
+    { id: 3, crop: t('chickpea'), quantity: `25 ${t('quintal')}`, amount: '₹18,230', buyer: t('private-buyer'), date: `1 ${t('week-ago')}`, icon: '🫛' }
   ]
 
   const notifications = [
-    { id: 1, title: 'सरकारी गेहूं खरीद', message: 'कल आपके गांव में शुरू होगी', type: 'govt', time: '2 घंटे पहले', unread: true },
-    { id: 2, title: 'नया खरीदार दिलचस्प', message: 'कोई आपका सोयाबीन खरीदना चाहता है', type: 'buyer', time: '5 घंटे पहले', unread: true },
-    { id: 3, title: 'भाव अलर्ट', message: 'गेहूं की कीमत 3% बढ़ी है', type: 'price', time: '1 दिन पहले', unread: false }
+    { id: 1, title: t('govt-wheat-purchase'), message: t('starts-tomorrow-village'), type: 'govt', time: `2 ${t('hours-ago')}`, unread: true },
+    { id: 2, title: t('new-buyer-interested'), message: t('wants-to-buy-soybean'), type: 'buyer', time: `5 ${t('hours-ago')}`, unread: true },
+    { id: 3, title: t('price-alert'), message: t('wheat-price-increased'), type: 'price', time: `1 ${t('days-ago')}`, unread: false }
   ]
 
   const unreadCount = notifications.filter(n => n.unread).length
@@ -31,8 +33,8 @@ const Dashboard = () => {
       <div className="bg-green-600 p-4 text-white border-b-2 border-green-700">
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-2xl font-bold mb-1">नमस्ते, राम कुमार जी! 🙏</h1>
-            <p className="text-green-100 text-sm">Welcome to your farming dashboard</p>
+            <h1 className="text-2xl font-bold mb-1">{t('namaste-ram-kumar')}</h1>
+            <p className="text-green-100 text-sm">{t('welcome-farming-dashboard')}</p>
           </div>
           <button
             onClick={() => setShowNotifications(!showNotifications)}
@@ -56,7 +58,7 @@ const Dashboard = () => {
               <span className="text-xl">💰</span>
               <span className="text-xs text-green-700 bg-green-100 px-2 py-1 rounded">+15%</span>
             </div>
-            <h3 className="text-xs text-gray-500 mb-1">Total Earnings</h3>
+            <h3 className="text-xs text-gray-500 mb-1">{t('total-earnings')}</h3>
             <p className="text-lg font-bold text-gray-800">{stats.totalEarnings}</p>
           </div>
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
@@ -64,23 +66,23 @@ const Dashboard = () => {
               <span className="text-xl">📊</span>
               <span className="text-xs text-blue-700 bg-blue-100 px-2 py-1 rounded">+3</span>
             </div>
-            <h3 className="text-xs text-gray-500 mb-1">Total Sales</h3>
+            <h3 className="text-xs text-gray-500 mb-1">{t('total-sales')}</h3>
             <p className="text-lg font-bold text-gray-800">{stats.totalSales}</p>
           </div>
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xl">⏳</span>
-              <span className="text-xs text-orange-700 bg-orange-100 px-2 py-1 rounded">Active</span>
+              <span className="text-xs text-orange-700 bg-orange-100 px-2 py-1 rounded">{t('active')}</span>
             </div>
-            <h3 className="text-xs text-gray-500 mb-1">Pending Orders</h3>
+            <h3 className="text-xs text-gray-500 mb-1">{t('pending-orders')}</h3>
             <p className="text-lg font-bold text-gray-800">{stats.pendingOrders}</p>
           </div>
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xl">🎫</span>
-              <span className="text-xs text-purple-700 bg-purple-100 px-2 py-1 rounded">Ready</span>
+              <span className="text-xs text-purple-700 bg-purple-100 px-2 py-1 rounded">{t('ready')}</span>
             </div>
-            <h3 className="text-xs text-gray-500 mb-1">Govt Tokens</h3>
+            <h3 className="text-xs text-gray-500 mb-1">{t('govt-tokens')}</h3>
             <p className="text-lg font-bold text-gray-800">{stats.govtTokens}</p>
           </div>
         </div>
@@ -90,15 +92,15 @@ const Dashboard = () => {
           <Link to="/marketplace" className="bg-white border-2 border-green-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
             <div className="text-center">
               <div className="text-3xl mb-2">🛒</div>
-              <h3 className="font-semibold text-gray-800 mb-1">Marketplace</h3>
-              <p className="text-xs text-gray-600">Sell to private buyers</p>
+              <h3 className="font-semibold text-gray-800 mb-1">{t('marketplace')}</h3>
+              <p className="text-xs text-gray-600">{t('sell-to-private-buyers')}</p>
             </div>
           </Link>
           <Link to="/govt-connect" className="bg-white border-2 border-blue-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
             <div className="text-center">
               <div className="text-3xl mb-2">🏛️</div>
-              <h3 className="font-semibold text-gray-800 mb-1">Govt Connect</h3>
-              <p className="text-xs text-gray-600">Government procurement</p>
+              <h3 className="font-semibold text-gray-800 mb-1">{t('government')}</h3>
+              <p className="text-xs text-gray-600">{t('government-procurement')}</p>
             </div>
           </Link>
         </div>
@@ -106,8 +108,8 @@ const Dashboard = () => {
         {/* Recent Sales */}
         <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-bold text-gray-800">Recent Sales</h3>
-            <button className="text-green-600 text-sm font-medium">View All</button>
+            <h3 className="text-lg font-bold text-gray-800">{t('recent-sales')}</h3>
+            <button className="text-green-600 text-sm font-medium">{t('view-all')}</button>
           </div>
           <div className="space-y-4">
             {recentSales.map((sale) => (
@@ -131,7 +133,7 @@ const Dashboard = () => {
         {showNotifications && (
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-bold text-gray-800">Notifications</h3>
+              <h3 className="text-lg font-bold text-gray-800">{t('notifications')}</h3>
               <button
                 onClick={() => setShowNotifications(false)}
                 className="text-gray-400 hover:text-gray-600"
