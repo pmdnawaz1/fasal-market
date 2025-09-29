@@ -88,21 +88,70 @@ const Dashboard = () => {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 mb-4">
           <Link to="/marketplace" className="bg-white border-2 border-green-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
             <div className="text-center">
               <div className="text-3xl mb-2">🛒</div>
-              <h3 className="font-semibold text-gray-800 mb-1">{t('marketplace')}</h3>
-              <p className="text-xs text-gray-600">{t('sell-to-private-buyers')}</p>
+              <h3 className="font-semibold text-gray-800 mb-1">Marketplace</h3>
+              <p className="text-xs text-gray-600">Sell to private buyers</p>
             </div>
           </Link>
           <Link to="/govt-connect" className="bg-white border-2 border-blue-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
             <div className="text-center">
               <div className="text-3xl mb-2">🏛️</div>
-              <h3 className="font-semibold text-gray-800 mb-1">{t('government')}</h3>
-              <p className="text-xs text-gray-600">{t('government-procurement')}</p>
+              <h3 className="font-semibold text-gray-800 mb-1">Government</h3>
+              <p className="text-xs text-gray-600">Government procurement</p>
             </div>
           </Link>
+          <Link to="/token-system" className="bg-white border-2 border-purple-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+            <div className="text-center">
+              <div className="text-3xl mb-2">🎫</div>
+              <h3 className="font-semibold text-gray-800 mb-1">Tokens</h3>
+              <p className="text-xs text-gray-600">Book procurement tokens</p>
+            </div>
+          </Link>
+          <Link to="/price-tracker" className="bg-white border-2 border-orange-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+            <div className="text-center">
+              <div className="text-3xl mb-2">📊</div>
+              <h3 className="font-semibold text-gray-800 mb-1">Price Tracker</h3>
+              <p className="text-xs text-gray-600">Track market prices</p>
+            </div>
+          </Link>
+        </div>
+
+        {/* More Features */}
+        <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 mb-4">
+          <h3 className="text-lg font-bold text-gray-800 mb-3">🌟 More Features</h3>
+          <div className="grid grid-cols-2 gap-3">
+            <Link to="/cold-storage" className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+              <div className="text-2xl">🏢</div>
+              <div>
+                <h4 className="font-semibold text-gray-800 text-sm">Cold Storage</h4>
+                <p className="text-xs text-gray-600">Find storage facilities</p>
+              </div>
+            </Link>
+            <Link to="/industry-connect" className="flex items-center space-x-3 p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors">
+              <div className="text-2xl">🏭</div>
+              <div>
+                <h4 className="font-semibold text-gray-800 text-sm">Industry Connect</h4>
+                <p className="text-xs text-gray-600">Direct industry sales</p>
+              </div>
+            </Link>
+            <Link to="/weather-advisory" className="flex items-center space-x-3 p-3 bg-teal-50 rounded-lg hover:bg-teal-100 transition-colors">
+              <div className="text-2xl">🌤️</div>
+              <div>
+                <h4 className="font-semibold text-gray-800 text-sm">Weather</h4>
+                <p className="text-xs text-gray-600">Weather & crop advisory</p>
+              </div>
+            </Link>
+            <Link to="/profile" className="flex items-center space-x-3 p-3 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
+              <div className="text-2xl">👤</div>
+              <div>
+                <h4 className="font-semibold text-gray-800 text-sm">Profile</h4>
+                <p className="text-xs text-gray-600">Manage your account</p>
+              </div>
+            </Link>
+          </div>
         </div>
 
         {/* Recent Sales */}
