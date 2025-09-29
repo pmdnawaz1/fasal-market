@@ -1,10 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
-import { useLanguage } from '../contexts/LanguageContext'
 
 const Navigation = () => {
   const location = useLocation()
-  const { t } = useLanguage()
   const [showMore, setShowMore] = useState(false)
 
   const mainNavItems = [

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useLanguage } from '../contexts/LanguageContext'
 import Card, { CardHeader, CardTitle, CardContent } from '../components/ui/Card'
 import Button from '../components/ui/Button'
 
@@ -22,7 +21,6 @@ interface Industry {
 const IndustryConnect = () => {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedCrop, setSelectedCrop] = useState('all')
-  const { t } = useLanguage()
 
   const industries: Industry[] = [
     {

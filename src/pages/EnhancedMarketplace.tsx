@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { crops, categories, seasons, getCropsByCategory, getCropsBySeason, searchCrops, getCropById } from '../data/crops'
 import Card, { CardHeader, CardTitle, CardContent } from '../components/ui/Card'
 import Button from '../components/ui/Button'

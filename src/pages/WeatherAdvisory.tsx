@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useLanguage } from '../contexts/LanguageContext'
 import Card, { CardHeader, CardTitle, CardContent } from '../components/ui/Card'
 import Button from '../components/ui/Button'
 
@@ -36,7 +35,6 @@ interface Advisory {
 const WeatherAdvisory = () => {
   const [selectedTab, setSelectedTab] = useState<'weather' | 'advisory'>('weather')
   const [selectedCrop, setSelectedCrop] = useState('all')
-  const { t } = useLanguage()
 
   const weatherData: WeatherData = {
     today: {

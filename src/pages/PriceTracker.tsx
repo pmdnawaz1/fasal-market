@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useLanguage } from '../contexts/LanguageContext'
 import Card, { CardHeader, CardTitle, CardContent } from '../components/ui/Card'
 import Button from '../components/ui/Button'
 
@@ -28,7 +27,6 @@ const PriceTracker = () => {
   const [selectedMarket, setSelectedMarket] = useState('all')
   const [selectedCrop, setSelectedCrop] = useState('all')
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid')
-  const { t } = useLanguage()
 
   const marketData: MarketData[] = [
     {

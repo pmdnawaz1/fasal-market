@@ -1,6 +1,4 @@
 import React from 'react'
-import { colors } from '../../design-system/colors'
-import { textStyles } from '../../design-system/typography'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger'
 export type ButtonSize = 'sm' | 'md' | 'lg'

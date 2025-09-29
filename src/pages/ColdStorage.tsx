@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useLanguage } from '../contexts/LanguageContext'
 import Card, { CardHeader, CardTitle, CardContent } from '../components/ui/Card'
 import Button from '../components/ui/Button'
 
@@ -20,7 +19,6 @@ interface ColdStorageUnit {
 const ColdStorage = () => {
   const [selectedFilter, setSelectedFilter] = useState('all')
   const [searchLocation, setSearchLocation] = useState('')
-  const { t } = useLanguage()
 
   const coldStorageUnits: ColdStorageUnit[] = [
     {
